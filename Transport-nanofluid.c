@@ -1,21 +1,28 @@
+// This UDF simulates the transport and deposition of nanoparticles in a nanofluid
+// A nanofluid is a fluid that contains suspended nanoparticles that can enhance its thermal and electrical properties
+// The UDF uses various effects such as buoyancy, thermophoresis, Brownian motion, Dufour effect, and Soret effect
+// The UDF also demonstrates how to use macros, aliases, and user-defined functions in Fluent UDFs
+
 #include "udf.h"
-#define s0 0 /* Initial Salinity of Mixture*/
-#define t0 300 /* Initial Temperature of Mixture Unit:K*/
-#define beta_t 0.0002 /*Coef of ther exp (base fluid) Unit:/degC*/
-#define beta_s 0.0008 /*Coef of Salinity(base fluid) Unit:%(-1)*/
-#define beta_t_p 0.0000008 /*Coef of ther exp(N-P)Unit:/degC*/
-#define ks 0.0000000014	/*Mass Diffusivity Unit: m^2/s */
-#define rho_p 3950 /*Density of Nano-Particle Unit:kg/m^3 */
-#define k_bf 0.5974 /*Ther Cond of base fluidUnit:w/m-k*/
-#define C_P_p 765 /* Sp Heat of Nano-Particle Unit: J/kg-K*/
-#define mu_bf 0.001 /* Dy Visco of base fluid Unit: kg/m-s*/
-#define d_p 0.00000008 /* Nano-Particle Diameter*/
-#define density_nf 1029.5
-#define spheat_nf 4050.896
-#define thercond_nf 0.58058
-#define dyvisco_nf 0.00102544
-#define beta_t_nf 0.2315
-#define D_T 3.7568e-14
+
+// User inputs and constants
+#define s0 0 // Initial salinity of the mixture (%)
+#define t0 300 // Initial temperature of the mixture (K)
+#define beta_t 0.0002 // Coefficient of thermal expansion of the base fluid (1/K)
+#define beta_s 0.0008 // Coefficient of salinity of the base fluid (1/%)
+#define beta_t_p 0.0000008 // Coefficient of thermal expansion of the nanoparticle (1/K)
+#define ks 0.0000000014	// Mass diffusivity of the nanoparticle (m^2/s)
+#define rho_p 3950 // Density of the nanoparticle (kg/m^3)
+#define k_bf 0.5974 // Thermal conductivity of the base fluid (W/m.K)
+#define C_P_p 765 // Specific heat capacity of the nanoparticle (J/kg.K)
+#define mu_bf 0.001 // Dynamic viscosity of the base fluid (kg/m.s)
+#define d_p 0.00000008 // Diameter of the nanoparticle (m)
+#define density_nf 1029.5 // Density of the nanofluid (kg/m^3)
+#define spheat_nf 4050.896 // Specific heat capacity of the nanofluid (J/kg.K)
+#define thercond_nf 0.58058 // Thermal conductivity of the nanofluid (W/m.K)
+#define dyvisco_nf 0.00102544 // Dynamic viscosity of the nanofluid (kg/m.s)
+#define beta_t_nf 0.2315 // Coefficient of thermal expansion of the nanofluid (1/K)
+#define D_T 3.7568e-14 // Thermal diffusivity of the nanofluid (m^2/s)
 
 /* Defined constants */
 
